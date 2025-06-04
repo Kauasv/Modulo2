@@ -1,50 +1,42 @@
-# Welcome to your Expo app 👋
+---
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+##  Recomendação: use o projeto no Windows (NÃO WSL)
 
-## Get started
+Este projeto foi pensado para rodar com facilidade no *Windows nativo*, especialmente por usar:
 
-1. Install dependencies
+- Expo CLI com suporte a navegador (--web)
+- expo-router para navegação por arquivos
+- Imagens, fontes e paths locais que podem falhar no WSL
+- Integração com Visual Studio Code e terminal do Windows
+- Possibilidade de usar *Expo Go no celular* via QR Code direto
+- Navegadores como Edge/Chrome com http://localhost:8081
 
-   ```bash
-   npm install
-   ```
+>  No WSL (Linux), alguns recursos como abertura de navegador, QR Code e até assets locais podem falhar ou exigir configurações extras (bridge de rede, liberação de portas, redirecionamento de display).
 
-2. Start the app
+ *Recomendação*: mantenha o projeto e dependências no ambiente Windows puro para evitar esses problemas e garantir compatibilidade com todos os alunos e desenvolvedores.
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+##  Como configurar o ambiente com NVM (Windows)
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+###  1. Remover instalações antigas (se necessário)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+>  Somente se você já instalou Node.js fora do NVM
 
-## Get a fresh project
+1. Vá até *Adicionar ou remover programas*
+2. Remova *Node.js*
+3. Reinicie o computador (opcional, mas recomendado)
 
-When you're ready, run:
+---
+
+###  2. Instalar o NVM (Node Version Manager) no Windows
+
+1. Acesse o repositório oficial:  
+    https://github.com/coreybutler/nvm-windows/releases  
+2. Baixe o instalador:  
+    *nvm-setup.exe*
+3. Execute o instalador com as opções padrão (ele será instalado em C:\Program Files\nvm)
+4. Após a instalação, *abra o terminal (PowerShell ou CMD)* e execute para confirmar:
 
 ```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+nvm -v
