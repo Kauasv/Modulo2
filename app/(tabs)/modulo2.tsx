@@ -1,14 +1,18 @@
-/*Import = importa diversos componentes do react natives 
-Safeareviwer: evita que o conteudo fique embaixo de barras do sistema(notch do ifone ) 
-ScrollAreaviwer : 
-text :  
-Pressable : botão da tela que responde ao toque 
-ActivityIndicaitor : componente de carregamento (loading spinner)
-Modal = janela flutuante (pop up )
-View : container generico 
-StyleSheet: -> define os estilos do css em js no java script css-in-js
-useState : importação do hook e useState para controlar estados locais(como abrir/fechar modal)
+/* 
+Importações:
+- Importa diversos componentes do React Native.
+- SafeAreaView: evita que o conteúdo fique sob barras do sistema (como o notch do iPhone).
+- ScrollView: permite rolagem vertical do conteúdo.
+- Text: componente de texto.
+- Pressable: botão sensível ao toque.
+- ActivityIndicator: spinner de carregamento.
+- Modal: janela flutuante (popup).
+- View: container genérico para layout.
+- StyleSheet: permite definir estilos CSS via JavaScript (CSS-in-JS).
+- useState: hook para controlar estados locais como abrir/fechar o modal.
+- router: usado para navegar entre páginas, como `router.push('/')`.
 */
+
 import React, { useState } from "react";
 import {
   ActivityIndicator,
@@ -21,78 +25,113 @@ import {
   View,
 } from "react-native";
 
+// Importa conteúdo reutilizável dentro da modal (lista, texto, etc.)
+import DetalhesContent from "@/components/ui/DetalhesContent";
+
+// Permite navegação entre páginas
+import { router } from "expo-router";
+
 export default function App() {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false); // estado do modal (aberto/fechado)
 
   return (
-    <SafeAreaView style={styles.container}> {/* corrigido: Style => style, conteier => container */}
-      <ScrollView contentContainerStyle={styles.content}> {/* corrigido: contentigConteinerStyle => contentContainerStyle, style => styles */}
-        <Text style={styles.title}>Bem vindo</Text>
+    <SafeAreaView style={styles.container}>
+      {/* ScrollView para permitir rolagem vertical */}
+      <ScrollView contentContainerStyle={styles.content}>
+        {/* Título da tela */}
+        <Text style={styles.title}>Bem-vindo ao App do Módulo 2!</Text>
 
-        <Pressable onPress={() => setModalVisible(true)} style = {styles.button}>
-          <Text styles = {styles.buttonText}>Abrir modal </Text>
+        {/* Botão para abrir o modal */}
+        <Pressable onPress={() => setModalVisible(true)} style={styles.button}>
+          <Text style={styles.buttonText}>Abrir Detalhes no Modal</Text>
         </Pressable>
 
-        <Modal visible={modalVisible} transparent={true}>
-          <View>
-            <View>
-              <Text>Conteúdo do Modal</Text>
-              <Pressable onPress={() => setModalVisible(false)}>
-                <Text>Fechar</Text>
-              </Pressable>
+        {/* Botão para navegar para a Home */}
+        <Pressable onPress={() => router.push('/')} style={styles.button}>
+          <Text style={styles.buttonText}>Ir para Home</Text>
+        </Pressable>
+
+        {/* Modal flutuante com fundo escurecido */}
+        <Modal visible={modalVisible} transparent animationType="slide">
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContent}>
+              {/* Conteúdo da modal vindo de outro componente */}
+              <DetalhesContent />
+
+              {/* Botões dentro da modal */}
+              <View style={styles.actions}>
+                <Pressable
+                  style={styles.close}
+                  onPress={() => setModalVisible(false)}
+                >
+                  <Text style={{ color: "white" }}>Fechar</Text>
+                </Pressable>
+                <Pressable
+                  style={styles.confirm}
+                  onPress={() => alert("Confirmado!")}
+                >
+                  <Text style={{ color: "white" }}>Confirmar</Text>
+                </Pressable>
+              </View>
             </View>
           </View>
         </Modal>
 
-        <ActivityIndicator />
+        {/* Indicador de carregamento */}
+        <ActivityIndicator size="large" color="green" style={{ marginTop: 20 }} />
       </ScrollView>
     </SafeAreaView>
   );
 }
 
+// Estilos CSS-in-JS
 const styles = StyleSheet.create({
-  /* ocupa toda a tela */
   container: {
-    flex: 1,
+    flex: 1, // ocupa toda a altura da tela
   },
   content: {
-    padding: 15,
+    padding: 20, // espaçamento interno
   },
-  /* com fonte maior e espaçamento */
   title: {
     fontSize: 24,
     marginBottom: 20,
   },
-  /* botão / margem inferior para separação */
   button: {
-    backgroundColor: "#007AFF",
-    padding: 20,
+    backgroundColor: "#007AFF", // azul
+    padding: 15,
     marginBottom: 20,
     borderRadius: 8,
+    alignItems: "center",
   },
-  // cor vermelha para o texto
   buttonText: {
-    color: "black",
-    textAlign: "center",
+    color: "white",
+    fontWeight: "bold",
   },
-  // fundo escuro semi-transparente para o modal (modal overlay)
-  ModalOverlay: {
+  modalOverlay: {
     flex: 1,
-    alignItems: "center", // corrigido: alignItens => alignItems
+    alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: "rgba(0,0,0,0.5)", // fundo escuro com transparência
   },
   modalContent: {
-    margin: 30,
     backgroundColor: "white",
     padding: 20,
-    borderRadius: 20,
+    borderRadius: 10,
+    width: "85%",
   },
-  modalButton: {
-    // você pode continuar estilizando aqui
+  actions: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 15,
   },
-  modalText: {
-    fontSize: 18,
-    marginBottom: 10,
+  confirm: {
+    backgroundColor: "green",
+    padding: 10,
+    borderRadius: 5,
+  },
+  close: {
+    backgroundColor: "red",
+    padding: 10,
+    borderRadius: 5,
   },
 });
