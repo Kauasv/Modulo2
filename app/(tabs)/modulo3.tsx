@@ -10,7 +10,8 @@ import {
 
 type Usuario = {
     id: number;
-    name: string;
+    firstName: string;
+    lastName: string;
 };
 
 export default function Modulo3() {
@@ -20,15 +21,15 @@ export default function Modulo3() {
 
     const carregarUsuarios = async () => {
         if (visivel) {
-            setVisivel(false); // Colapsa a lista se já estiver visível
+            setVisivel(false); // Oculta a lista se já estiver visível
             return;
         }
 
         setCarregando(true);
         try {
-            const response = await fetch('https://jsonplaceholder.typicode.com/users');
+            const response = await fetch('https://dummyjson.com/users');
             const data = await response.json();
-            setUsuarios(data);
+            setUsuarios(data.users); // <- importante: acessa o array correto da API
             setVisivel(true);
         } catch (error) {
             console.error('Erro ao carregar usuários:', error);
@@ -47,10 +48,15 @@ export default function Modulo3() {
                 </Text>
             </Pressable>
 
-            {carregando && <ActivityIndicator size="large" color="#0a5ca8" />}
+            {carregando && (
+                <ActivityIndicator size="large" color="#0a5ca8" style={{ marginVertical: 10 }} />
+            )}
 
+            {/* Lista de usuários */}
             {visivel && usuarios.map(usuario => (
-                <Text key={usuario.id}>{usuario.name}</Text>
+                <View key={usuario.id}>
+                    <Text>{usuario.firstName} {usuario.lastName}</Text>
+                </View>
             ))}
 
             <View style={styles.footer}>
@@ -66,7 +72,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
-        backgroundColor: '#f9f9f9',
+        backgroundColor: '#e9ecef',
+        borderRadius: 6,
     },
     title: {
         fontSize: 24,

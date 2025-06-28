@@ -10,11 +10,16 @@ return(
   />
   <ThemedText type = 'title' style = {styles.title}> Home </ThemedText>
   <Pressable onPress= {() => router.push('/modulo2')}
-  style={styles.buttonText}>
+    style={styles.buttonText}>
       <Text style={styles.buttonText}> Ir para o modulo2</Text>
     </Pressable>
+    
     <Pressable onPress = {()=>router.push('/explore')}
   style={styles.buttonText}>
+    </Pressable>
+    <Pressable onPress = {()=>router.push('/(tabs)/modulo3')}
+  style={styles.buttonText}>
+    
       <Text style={styles.buttonText}> Ir para o explorar</Text>
     </Pressable>
     </ScrollView>
@@ -38,5 +43,8 @@ const styles = StyleSheet.create({
         fontSize: 28,
         fontWeight: 'bold', //Texto em negrito
       },
+      title:{fontSize:16,
+        
+      }
     }
   )
