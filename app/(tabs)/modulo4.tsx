@@ -49,6 +49,7 @@ export default function Modulo4() {
                 placeholder="Digite seu nome"
                 value={nome}
                 onChangeText={setNome}
+                style={styles.input}
                 //limpa o campo nome 
             />
 
@@ -57,6 +58,7 @@ export default function Modulo4() {
                 value={email}
                 onChangeText={setEmail}
                 keyboardType='email-address'// abre o teclado otimizado para email 
+                style={styles.input}
             />
 
             <TextInput
@@ -65,6 +67,7 @@ export default function Modulo4() {
                 onChangeText={setMensagem}
                 style={[styles.input, { height: 100 }]}
                 multiline // permite varias linhas de texto 
+                
             />
 
             <Pressable onPress={handleEnviar} style={styles.button}>
@@ -79,9 +82,10 @@ export default function Modulo4() {
             {/*mostra o texto de sucessso quando o enviado foir igual a === true */}
 
             {enviado && (
-                <Text style={tyle.success} >mensagem ienviada com sucesso ! </Text>
+                <Text style={styles.success} >mensagem ienviada com sucesso ! </Text>
+
             )}
-            
+
             <Pressable style={styles.button}>
                 <Text style={styles.buttonText}>Home</Text>
             </Pressable>
@@ -119,4 +123,21 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 16,
     },
+
+    success: {
+        marginBottomton: 10,
+        fontWeight: 'bold',
+
+    
+    },
+    input : {
+
+        borderWidth: 2 ,
+        borderColor : '#ccc222',
+        padding : 10 ,
+        borderRadius : 6,
+        marginBottom: 10 ,
+        width: 500 , 
+
+    } 
 });

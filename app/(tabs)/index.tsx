@@ -15,10 +15,10 @@ return(
     </Pressable>
     
     <Pressable onPress = {()=>router.push('/explore')}
-  style={styles.buttonText}>
+    style={styles.buttonText}>
     </Pressable>
     <Pressable onPress = {()=>router.push('/(tabs)/modulo3')}
-  style={styles.buttonText}>
+    style={styles.buttonText}>
     
       <Text style={styles.buttonText}> Ir para o explorar</Text>
     </Pressable>
